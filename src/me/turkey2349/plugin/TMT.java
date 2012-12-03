@@ -32,7 +32,12 @@ public class TMT extends JavaPlugin
 		
 	public void onEnable()
 	{
-	String pluginFolder = getDataFolder().getAbsolutePath();
+		//Register commands for use in PlayerCommands.class
+		getCommand("join").setExecutor(new PlayerCommands(this));
+		getCommand("leave").setExecutor(new PlayerCommands(this));
+		getCommand("forcestart").setExecutor(new PlayerCommands(this));
+		
+		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
         
         if(!pluginFolder.contains("config.yml"))
