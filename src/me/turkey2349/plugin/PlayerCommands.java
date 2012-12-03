@@ -17,10 +17,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		//Need to make sure CommandSender is of type Player (don't want console doing this yet)
 		if (sender instanceof Player){
 			Player player = (Player) sender;
-			//commands
 			if (cmd.getName().equalsIgnoreCase("tjoin")) {
 				// What to do when player joins match.
 				// Call a method in TMT to add them to the ArrayList
@@ -33,8 +31,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				player.sendMessage("You Left the Match!");
 			}
 			if (cmd.getName().equalsIgnoreCase("tfs")) {
-				// What to do when player leaves match.
-				// Call a method in TMT to remove them from the ArrayList
+				// What to do when player forces start of match.
+				// Call a method in TMT to handle matches
 				player.sendMessage("You forced the match to start!");
 			}
 		} else {
