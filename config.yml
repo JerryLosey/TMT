@@ -1,0 +1,5 @@
+# Defalut Config for TMT
+Server Restart: true
+Wait Time Enabled: true
+Wait Time(Sec): 30
+Force Everyone to join: true
