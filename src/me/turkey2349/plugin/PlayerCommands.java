@@ -21,16 +21,21 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		if (sender instanceof Player){
 			Player player = (Player) sender;
 			//commands
-			if (cmd.getName().equalsIgnoreCase("join")) {
+			if (cmd.getName().equalsIgnoreCase("tjoin")) {
 				// What to do when player joins match.
 				// Call a method in TMT to add them to the ArrayList
 				player.sendMessage("You Joined the Match!");
 				
 			}
-			if (cmd.getName().equalsIgnoreCase("Leave")) {
+			if (cmd.getName().equalsIgnoreCase("tLeave")) {
 				// What to do when player leaves match.
 				// Call a method in TMT to remove them from the ArrayList
 				player.sendMessage("You Left the Match!");
+			}
+			if (cmd.getName().equalsIgnoreCase("tfs")) {
+				// What to do when player leaves match.
+				// Call a method in TMT to remove them from the ArrayList
+				player.sendMessage("You forced the match to start!");
 			}
 		} else {
 			// Denies access to console users
