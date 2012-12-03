@@ -23,6 +23,7 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> Maps = new ArrayList<String>();
 	public final Listeners Listeners = new Listeners(this);
 	public int A;
+	public int B;
 	
 	static Random random = new Random();
 	Logger log = Logger.getLogger("Minecraft");
@@ -81,9 +82,10 @@ public class TMT extends JavaPlugin
 	}
 	public void ForceStart()
 	{
-    	
     	Collections.shuffle(JoinedPlayers, random);
-    	if(JoinedPlayers.size() >= 3)
+    	B = getConfig().getInt("Minimum Players");
+    	
+    	if(JoinedPlayers.size() >= B)
     	{
     	    for (int i = 0; i < JoinedPlayers.size(); i++) 
     	    {
@@ -98,6 +100,8 @@ public class TMT extends JavaPlugin
     	    	    player.sendMessage("You are a Tritor!!");
     	    	    player.sendMessage("Kill all the Inocent");
     	    	    player.sendMessage("The Traitors are:");
+
+        	    	getServer().broadcastMessage("~Traitor Message~");
     	    	    int b = 0;
     	    	    while(b < JoinedPlayers.size() )
     	    	    {
@@ -110,6 +114,7 @@ public class TMT extends JavaPlugin
     	        	InnocentPlayers.add(playerName);
     	        	player.sendMessage("You are Innocent!!");
     	        	player.sendMessage("Kill all the Traitors");
+        	    	getServer().broadcastMessage("~Innocent Message~");
     	        } 
     	    }
     	    if(TraitorPlayers.size() == 0)
@@ -140,7 +145,7 @@ public class TMT extends JavaPlugin
     		    }
     	    }
         }
-    	else if(JoinedPlayers.size() < 3)
+    	else if(JoinedPlayers.size() < B)
     	{
     		getServer().broadcastMessage("There are not enough players online!");
     		getServer().broadcastMessage("TMT is restarting Countdown!");
