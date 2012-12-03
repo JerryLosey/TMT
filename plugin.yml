@@ -7,10 +7,10 @@ authors: [teh_jombi]
 commands:
    TJoin:
        description: Lets the player join the game
-       usage: Syntax error! /<command>
+       usage: /<command>
    TLeave:
       description: Lets the player leave the game
-      usage: Syntax error! /<command>
+      usage: /<command>
    TFS:
       description: Lets the player FoceStart the game
-      usage: Syntax error! /<command>
+      usage: /<command>

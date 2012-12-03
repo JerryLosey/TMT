@@ -3,13 +3,14 @@ description: Trouble in MineTown
 main: me.turkey2349.plugin.TMT
 version: 1.0.3
 author: Turkey2349
+authors: [teh_jombi]
 commands:
-   Join:
+   TJoin:
        description: Lets the player join the game
-       usage: /TMT <command>
-   Leave:
+       usage: Syntax error! /<command>
+   TLeave:
       description: Lets the player leave the game
-      usage: /TMT <command>
-   ForceStart:
+      usage: Syntax error! /<command>
+   TFS:
       description: Lets the player FoceStart the game
-      usage: /TMT <command>
+      usage: Syntax error! /<command>
