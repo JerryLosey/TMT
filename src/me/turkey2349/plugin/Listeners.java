@@ -21,9 +21,12 @@ public class Listeners  implements Listener
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
+		if(plugin.getConfig().getBoolean("Force Join on Player Join") == true)
+		{
 		Player player = event.getPlayer();
 		String name = player.getName();
 		plugin.Jadd(name);
+		}
 	}
 	public void PlayerQuitEvent(org.bukkit.event.player.PlayerQuitEvent event)
 	{

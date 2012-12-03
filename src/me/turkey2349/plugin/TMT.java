@@ -219,7 +219,7 @@ public class TMT extends JavaPlugin
 				}
 			    if (args[0].equalsIgnoreCase("Join"))
 			    {
-			    	if(getConfig().getBoolean("Force Everyone to join") == false)
+			    	if(getConfig().getBoolean("Force Join on Game Start") == false)
 			    	{
 				    if (player == JoinedPlayers)
 				    {
@@ -231,14 +231,14 @@ public class TMT extends JavaPlugin
 				        player.sendMessage(ChatColor.GREEN + "You Have Joined The Game!");
 				    }
 			    	}
-			    	else if(getConfig().getBoolean("Force Everyone to join") == true)
+			    	else if(getConfig().getBoolean("Force Join on Game Start") == true)
 			    	{
 			    		player.sendMessage(ChatColor.RED + "You cannot leave or join the game!");
 			    	}
 		        }
 			    else if (args[0].equalsIgnoreCase("Leave"))
 			    {
-			    	if(getConfig().getBoolean("Force Everyone to join") == false)
+			    	if(getConfig().getBoolean("Force Join on Game Start") == false)
 			    	{
 				    if (player == JoinedPlayers)
 				    {
@@ -250,7 +250,7 @@ public class TMT extends JavaPlugin
 				        player.sendMessage(ChatColor.RED + "You Are Not already playing");
 				    }
 			    	}
-			    	else if(getConfig().getBoolean("Force Everyone to join") == true)
+			    	else if(getConfig().getBoolean("Force Join on Game Start") == true)
 			    	{
 			    		player.sendMessage(ChatColor.RED + "You cannot leave or join the game!");
 			    	}
