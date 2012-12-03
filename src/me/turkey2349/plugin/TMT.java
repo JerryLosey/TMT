@@ -25,6 +25,7 @@ public class TMT extends JavaPlugin
 	public final Listeners Listeners = new Listeners(this);
 	public int A;
 	public int B;
+	public int C;
 	
 	static Random random = new Random();
 	Logger log = Logger.getLogger("Minecraft");
