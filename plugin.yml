@@ -1,7 +1,7 @@
 name: TMT
 description: Trouble in MineTown
 main: me.turkey2349.plugin.TMT
-version: 1.0.1b
+version: 1.0.2
 author: Turkey2349
 commands:
    TMT Join:
