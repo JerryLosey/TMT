@@ -1,15 +1,15 @@
 name: TMT
 description: Trouble in MineTown
 main: me.turkey2349.plugin.TMT
-version: 1.0.2
+version: 1.0.3
 author: Turkey2349
 commands:
-   TMT Join:
-      description: Lets the player join the game
-      usage: /TMT <command>
-   TMT Leave:
+   Join:
+       description: Lets the player join the game
+       usage: /TMT <command>
+   Leave:
       description: Lets the player leave the game
       usage: /TMT <command>
-   TMT ForceStart:
+   ForceStart:
       description: Lets the player FoceStart the game
       usage: /TMT <command>
