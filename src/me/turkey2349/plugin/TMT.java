@@ -35,9 +35,9 @@ public class TMT extends JavaPlugin
 	public void onEnable()
 	{
 		//Register commands for use in PlayerCommands.class
-		getCommand("tjoin").setExecutor(new PlayerCommands(this));
-		getCommand("tleave").setExecutor(new PlayerCommands(this));
-		getCommand("tfs").setExecutor(new PlayerCommands(this));
+		getCommand("TMTjoin").setExecutor(new PlayerCommands(this));
+		getCommand("TMTleave").setExecutor(new PlayerCommands(this));
+		getCommand("TMTfs").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
