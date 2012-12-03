@@ -32,7 +32,7 @@ public class TMT extends JavaPlugin
 		
 	public void onEnable()
 	{
-		String pluginFolder = getDataFolder().getAbsolutePath();
+	String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
         
         if(!pluginFolder.contains("config.yml"))
