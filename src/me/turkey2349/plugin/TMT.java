@@ -30,7 +30,7 @@ public class TMT extends JavaPlugin
 	
 	static Random random = new Random();
 	Logger log = Logger.getLogger("Minecraft");
-	String LOG_PREFIX = "[YourPlugin's Name] ";
+	String LOG_PREFIX = "[TMT] ";
 	//Listeners listeners = new Listeners();
 	FileConfiguration config;
 		
