@@ -1,5 +1,6 @@
 package me.turkey2349.plugin;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,16 +33,13 @@ public class PlayerDeathListener implements Listener {
 		if(signBlock.getType() == Material.SIGN_POST){
 			plugin.getServer().broadcastMessage(""+ signBlock.getState()+"");
 			Sign sign = (Sign) signBlock.getState();
-			sign.setLine(1, player.getDisplayName());
+			sign.setLine(1, ChatColor.GREEN + player.getDisplayName());
 			// Detect if traitor or innocent
-			//sign.setLine(2, player.getDisplayName());
+			sign.setLine(2, ChatColor.UNDERLINE + player.getDisplayName());
 			
 			sign.update(true);
 		}
 		
-		//deathevent.setLine();
-		
-		//Sign sign = location.getBlockY();
 		//if(InnocentPlayers.Icontains(player))
 		//{
 			TMT.setLine(1, "Innocent");
