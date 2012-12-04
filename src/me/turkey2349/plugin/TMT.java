@@ -22,7 +22,9 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> InnocentPlayers = new ArrayList<String>();
 	public final static ArrayList<String> TraitorPlayers = new ArrayList<String>();
 	public final static ArrayList<String> DeadPlayers = new ArrayList<String>();
+	public final static ArrayList<String> DetectivePlayers = new ArrayList<String>();
 	public final static ArrayList<String> Maps = new ArrayList<String>();
+	public final static ArrayList<Integer> MapsSpawn = new ArrayList<Integer>();
 	public final Listeners Listeners = new Listeners(this);
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
@@ -114,8 +116,15 @@ public class TMT extends JavaPlugin
     	    	    	player.sendMessage("" + JoinedPlayers.get(b));
     	    		    b+=6;
     	    	    }
-    	        } 
-    	        else if(a != 0)
+    	        }
+    	        else if (a == 1)
+    	        {
+    	        	DetectivePlayers.add(playerName);
+    	        	player.sendMessage("You are a Detective!!");
+    	        	player.sendMessage("Kill all the Traitors");
+        	    	getServer().broadcastMessage("Detective Message");
+    	        }
+    	        else if(a != 0 && a != 1)
     	        {
     	        	InnocentPlayers.add(playerName);
     	        	player.sendMessage("You are Innocent!!");
@@ -180,7 +189,6 @@ public class TMT extends JavaPlugin
 	public void Jadd(String playerName)
 	{
 			//JoinedPlayers.add(playerName);
-
 	}
 	public void Dadd(Player player)
 	{
@@ -210,6 +218,14 @@ public class TMT extends JavaPlugin
 	public boolean Icontains(Player player) 
 	{
 		TMT.setLine(1, "Innocent");
+		return false;
+	}
+	public void Madd(String args)
+	{
+			Maps.add(args);
+	}
+	public boolean Mcontains(String args) 
+	{
 		return false;
 	}
 

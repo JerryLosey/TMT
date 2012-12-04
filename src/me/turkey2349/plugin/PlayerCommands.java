@@ -10,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 
+	TMT Maps;
+	
 	private TMT plugin;
 	public PlayerCommands(TMT plugin){
 		this.plugin = plugin;
@@ -34,6 +36,37 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				// What to do when player forces start of match.
 				// Call a method in TMT to handle matches
 				player.sendMessage("You forced the match to start!");
+			}
+			if (cmd.getName().equalsIgnoreCase("TMTcreate"))
+			{
+				if(args.length == 0)
+		    	{
+		    	    player.sendMessage("to create an arena you have to do /TMT create (arena name), Then you have to do /TMT ArenaSpawn (arena name)");
+		    	}
+		    	else if(args.length == 1)
+		    	{
+		    		Maps.Madd(args[1]);
+		    		player.sendMessage("Arena " + args[1] + " has been created!");
+		    	}
+		    	else if(args.length > 1)
+		    	{
+		    		player.sendMessage("Invalid arena name");
+		    	}
+		    else if (args[0].equalsIgnoreCase("ArenaSpawn"))
+			{
+			    if(args.length == 1)
+			    {
+			    	player.sendMessage("please enter the name of the arena that you would like to set the spawnpoint of.");
+			    }
+			    if(args.length == 2)
+			    {
+			    	if(Maps.Mcontains(args[1]))
+			        {
+			    	    getConfig().createSection("Arena " + args[1] + "'s Spawn:");
+			        }
+			    }
+			 }
+
 			}
 		} else {
 			// Denies access to console users

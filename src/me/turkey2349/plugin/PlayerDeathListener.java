@@ -12,11 +12,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerDeathListener implements Listener {
+	
 	TMT plugin;
 	TMT JoinedPlayers;
 	TMT InnocentPlayers;
 	TMT TraitorPlayers;
 	TMT DeadPlayers;
+	TMT DetectivePlayers;
 	
 	public PlayerDeathListener(TMT plugin){
 		this.plugin = plugin;
