@@ -25,6 +25,7 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> Maps = new ArrayList<String>();
 	public final Listeners Listeners = new Listeners(this);
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
+	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
 	public int A;
 	public int B;
 	
@@ -52,6 +53,7 @@ public class TMT extends JavaPlugin
         }
 		getServer().getPluginManager().registerEvents(Listeners, this);
 		getServer().getPluginManager().registerEvents(PlayerDeathListener, this);
+		getServer().getPluginManager().registerEvents(BlockBreakListener, this);
 		A = getConfig().getInt("Wait Time(Sec)");
 		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			
