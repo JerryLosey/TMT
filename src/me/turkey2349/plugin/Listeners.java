@@ -34,26 +34,26 @@ public class Listeners  implements Listener
 		JoinedPlayers.Jremove(player);
 	}
 	
-	@EventHandler
-	public void PlayerDeathEvent(org.bukkit.event.entity.PlayerDeathEvent event1)
-	{
-		Player player = event1.getEntity();
-		
-		event1.getEntity().getLocation().getBlock().setType(Material.SIGN_POST);
-		TMT.setLine(0, player);
-		if(InnocentPlayers.Icontains(player))
-		{
-			TMT.setLine(1, "Innocent");
-		}
-		else if(TraitorPlayers.Tcontains(player))
-		{
-			TMT.setLine(1, "Traitor");
-		}
-		
-		DeadPlayers.Dadd(player);
-		TraitorPlayers.Tremove(player);
-		InnocentPlayers.Iremove(player);
-
-		
-	}
+//	@EventHandler
+//	public void PlayerDeathEvent(org.bukkit.event.entity.PlayerDeathEvent event1)
+//	{
+//		Player player = event1.getEntity();
+//		
+//		event1.getEntity().getLocation().getBlock().setType(Material.SIGN_POST);
+//		TMT.setLine(0, player);
+//		if(InnocentPlayers.Icontains(player))
+//		{
+//			TMT.setLine(1, "Innocent");
+//		}
+//		else if(TraitorPlayers.Tcontains(player))
+//		{
+//			TMT.setLine(1, "Traitor");
+//		}
+//		
+//		DeadPlayers.Dadd(player);
+//		TraitorPlayers.Tremove(player);
+//		InnocentPlayers.Iremove(player);
+//
+//		
+//	}
 }

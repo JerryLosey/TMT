@@ -13,6 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TMT extends JavaPlugin
@@ -23,6 +24,7 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> DeadPlayers = new ArrayList<String>();
 	public final static ArrayList<String> Maps = new ArrayList<String>();
 	public final Listeners Listeners = new Listeners(this);
+	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
 	public int A;
 	public int B;
 	
@@ -49,6 +51,7 @@ public class TMT extends JavaPlugin
         saveDefaultConfig();
         }
 		getServer().getPluginManager().registerEvents(Listeners, this);
+		getServer().getPluginManager().registerEvents(PlayerDeathListener, this);
 		A = getConfig().getInt("Wait Time(Sec)");
 		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			

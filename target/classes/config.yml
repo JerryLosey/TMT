@@ -2,5 +2,6 @@
 Server Restart: true
 Wait Time Enabled: true
 Wait Time(Sec): 30
-Force Everyone to join: true
+Force Join on Game Start: true
+Force Join on Player Join: true
 Minimum Players: 1
