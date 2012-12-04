@@ -14,3 +14,9 @@ commands:
    TMTfs:
       description: Lets the player FoceStart the game
       usage: /<command>
+   TMTcreate:
+      description: Lets the player Create an arena
+      usage: /<command> <arenaName>
+   TMTas:
+      description: Lets the player Assign the Arena spawn
+      usage: /<command> <exsistingArenaName>

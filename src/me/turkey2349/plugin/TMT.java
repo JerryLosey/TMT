@@ -13,7 +13,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TMT extends JavaPlugin
@@ -186,47 +185,53 @@ public class TMT extends JavaPlugin
     		},0L ,20L);
     	}
 	}
-	public void Jadd(String playerName)
+	public void Jadd(String name)
 	{
-			//JoinedPlayers.add(playerName);
+			JoinedPlayers.add(name);
 	}
-	public void Dadd(Player player)
+	public void Dadd(String name)
 	{
-			DeadPlayers.add(player.getDisplayName());
+			DeadPlayers.add(name);
 
-	}
-	public void Jremove(Player player)
-	{
-			JoinedPlayers.remove(player);
-
-	}
-	public void Iremove(Player player)
-	{
-			InnocentPlayers.remove(player);
-
-	}
-	public void Tremove(Player player)
-	{
-			TraitorPlayers.remove(player);
-
-	}
-	public boolean Tcontains(Player player) 
-	{
-		TMT.setLine(1, "Traitor");
-		return false;
-	}
-	public boolean Icontains(Player player) 
-	{
-		TMT.setLine(1, "Innocent");
-		return false;
 	}
 	public void Madd(String args)
 	{
 			Maps.add(args);
 	}
+	public void MSadd(String MSname) 
+	{
+		MapsSpawn.add(MSname);
+	}
+	public void Jremove(String name)
+	{
+			JoinedPlayers.remove(name);
+
+	}
+	public void Iremove(String name)
+	{
+			InnocentPlayers.remove(name);
+
+	}
+	public void Tremove(String name)
+	{
+			TraitorPlayers.remove(name);
+
+	}
+	public boolean Tcontains(String name) 
+	{
+		return true;
+	}
+	public boolean Icontains(String name) 
+	{
+		return true;
+	}
+	public boolean Dcontains(String name) 
+	{
+		return true;
+	}
 	public boolean Mcontains(String args) 
 	{
-		return false;
+		return true;
 	}
 
 	 @Override

@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,6 +27,7 @@ public class PlayerDeathListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent deathevent)
 	{
 		Player player = deathevent.getEntity();
+		String name = player.getName();
 		
 		Location location = deathevent.getEntity().getLocation();
 		location.getBlock().setType(Material.SIGN_POST);
@@ -37,24 +37,27 @@ public class PlayerDeathListener implements Listener {
 			Sign sign = (Sign) signBlock.getState();
 			sign.setLine(1, ChatColor.GREEN + player.getDisplayName());
 			// Detect if traitor or innocent
-			sign.setLine(2, ChatColor.UNDERLINE + player.getDisplayName());
+			if(InnocentPlayers.Icontains(name))
+			{
+			    sign.setLine(2, ChatColor.BLUE + ("Innocent"));
+			}
+			else if(TraitorPlayers.Tcontains(name))
+			{
+				sign.setLine(2, ChatColor.BLUE + ("Traitor"));
+			}
+			else if(DetectivePlayers.Dcontains(name))
+			{
+				sign.setLine(2, ChatColor.BLUE + ("Traitor"));
+			}
 			
 			sign.update(true);
 		}
 		
-		//if(InnocentPlayers.Icontains(player))
-		//{
-			TMT.setLine(1, "Innocent");
-		//}
-		//else if(TraitorPlayers.Tcontains(player))
-		//{
-		//	TMT.setLine(1, "Traitor");
-		//}
-		
-		//DeadPlayers.Dadd(player);
-		//TraitorPlayers.Tremove(player);
-		//InnocentPlayers.Iremove(player);
+		DeadPlayers.Dadd(name);
+		TraitorPlayers.Tremove(name);
+	    InnocentPlayers.Iremove(name);
+	    
 
-		
+
 	}
 }

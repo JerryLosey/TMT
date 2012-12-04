@@ -1,0 +1,4 @@
+-Attempted to fix the Array Adding System.
+-Found a problem With The Map Array Adding System. if we use it that way then when
+ we update it people would lose the maps and their spawns since we updated the Arrays. 
+ We are going to have to make a sepreate file for the Arenas or put them into the Config.

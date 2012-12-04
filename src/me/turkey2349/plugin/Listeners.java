@@ -1,6 +1,5 @@
 package me.turkey2349.plugin;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +30,8 @@ public class Listeners  implements Listener
 	public void PlayerQuitEvent(org.bukkit.event.player.PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer();
-		JoinedPlayers.Jremove(player);
+		String name = player.getName();
+		plugin.Jremove(name);
 	}
 	
 //	@EventHandler

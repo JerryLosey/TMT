@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 
 	TMT Maps;
+	TMT MapsSpawn;
 	
 	private TMT plugin;
 	public PlayerCommands(TMT plugin){
@@ -52,7 +53,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		    	{
 		    		player.sendMessage("Invalid arena name");
 		    	}
-		    else if (args[0].equalsIgnoreCase("ArenaSpawn"))
+		    else if (args[0].equalsIgnoreCase("TMTas"))
 			{
 			    if(args.length == 1)
 			    {
@@ -62,7 +63,10 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			    {
 			    	if(Maps.Mcontains(args[1]))
 			        {
-			    	    getConfig().createSection("Arena " + args[1] + "'s Spawn:");
+			    		String MSname = args[1] + ("'s Spawn");
+			    		int MSnameCords = ;
+			    	    MapsSpawn.MSadd(MSname);
+			    	    
 			        }
 			    }
 			 }
