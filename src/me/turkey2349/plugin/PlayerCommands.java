@@ -33,6 +33,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				player.sendMessage("You Left the Match!");
 			}
 			if (cmd.getName().equalsIgnoreCase("TMTreset")) {
+				// Clear the players hashmap
+				// Essentially allows admin to reset the player roles
 				player.sendMessage("You reset the players!");
 				plugin.clearPlayers();
 			}
