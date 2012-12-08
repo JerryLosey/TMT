@@ -107,7 +107,7 @@ public class TMT extends JavaPlugin
     	    	    player.sendMessage("You are a Tritor!!");
     	    	    player.sendMessage("Kill all the Inocent");
     	    	    player.sendMessage("The Traitors are:");
-
+    	 
         	    	getServer().broadcastMessage("~Traitor Message~");
     	    	    int b = 0;
     	    	    while(b < JoinedPlayers.size() )
