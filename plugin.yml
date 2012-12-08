@@ -4,6 +4,8 @@ main: me.turkey2349.plugin.TMT
 version: 1.0.3
 author: Turkey2349
 authors: [teh_jombi]
+depend:
+  - Citizens
 commands:
    TMTjoin:
        description: Lets the player join the game
@@ -13,4 +15,7 @@ commands:
       usage: /<command>
    TMTfs:
       description: Lets the player FoceStart the game
+      usage: /<command>
+   TMTreset:
+      description: Lets the player reset the game and player roles
       usage: /<command>

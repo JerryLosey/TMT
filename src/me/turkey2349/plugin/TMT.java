@@ -4,6 +4,9 @@ package me.turkey2349.plugin;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -18,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TMT extends JavaPlugin
 {
+	// Initialize arrays
 	public final static ArrayList<String> JoinedPlayers = new ArrayList<String>();
 	public final static ArrayList<String> InnocentPlayers = new ArrayList<String>();
 	public final static ArrayList<String> TraitorPlayers = new ArrayList<String>();
@@ -26,8 +30,16 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> Maps = new ArrayList<String>();
 	public final static ArrayList<Integer> MapsSpawn = new ArrayList<Integer>();
 	public final Listeners Listeners = new Listeners(this);
+	
+	// Test
+	public static Map<String,String> players = new HashMap<String,String>();
+	public static Player[] onlinePlayers;
+	
+	// Initialize Listeners
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
+	
+	
 	public int A;
 	public int B;
 	
@@ -56,6 +68,20 @@ public class TMT extends JavaPlugin
 		getServer().getPluginManager().registerEvents(Listeners, this);
 		getServer().getPluginManager().registerEvents(PlayerDeathListener, this);
 		getServer().getPluginManager().registerEvents(BlockBreakListener, this);
+	}
+	
+	public void onDisable()
+	{
+	}
+	
+	public static void setLine(int i, Player player) 
+	{
+	}
+	public static void setLine(int i, String string) 
+	{
+	}
+	
+	public void forceStart(){
 		A = getConfig().getInt("Wait Time(Sec)");
 		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			
@@ -70,125 +96,72 @@ public class TMT extends JavaPlugin
 				}
 				else
 				{
-					ForceStart();
+					//forceStart();
 					A--;
 				}
 				}
 			}
 		},0L ,20L);
+		B = getConfig().getInt("Minimum Players");
+		setPlayers();
+		if(players.size() >= B) {
+			getServer().broadcastMessage("Starting!");
+			for (int i = 0; i < JoinedPlayers.size(); i++) {
+				String playerName = JoinedPlayers.get(i).toString();
+				Player player = Bukkit.getPlayer(playerName);
+				player.sendMessage("You are a: " + players.get(playerName));
+			}
+			
+			
+		} else {
+			getServer().broadcastMessage("Not Enough Players!");
+		}
 	}
 	
-	public void onDisable()
-	{
+	public void clearPlayers() {
+		players.clear();
 	}
 	
-	public static void setLine(int i, Player player) 
-	{
+	public void setPlayers() {
+		Random randomGenerator = new Random();
+		storePlayers();
+		
+		// We need to determine how many Innocent will be in the game
+		// Innocent = 75%
+		// Traitor = 25%
+		int numOfInnocent = (int) ( (players.size() + 1) * .75);
+		// Lets loop through and use the random int generator to change player statuses
+		int randomIndex = randomGenerator.nextInt(players.size());
+		
+		int x = 0;
+		// Loop through the number of innocent players
+		// choose a random player and set them as innocent
+		// The remaining will be traitors!
+		for (x = 1; x <= numOfInnocent; x++) {
+			String playname = onlinePlayers[randomIndex].getName();
+			players.put(playname, "Innocent");
+		}
 	}
-	public static void setLine(int i, String string) 
-	{
+	public void storePlayers(){
+		onlinePlayers = this.getServer().getOnlinePlayers();
+		for (Player player : onlinePlayers) {
+			String playerName = player.getName();
+			players.put("" + playerName + "", "Traitor");
+		}
 	}
-	public void ForceStart()
-	{
-    	Collections.shuffle(JoinedPlayers, random);
-    	B = getConfig().getInt("Minimum Players");
-    	
-    	if(JoinedPlayers.size() >= B)
-    	{
-    	    for (int i = 0; i < JoinedPlayers.size(); i++) 
-    	    {
-    	    	String playerName = JoinedPlayers.get(i).toString();
-    	    	Player player = Bukkit.getPlayer(playerName);
-    	        //Player playerName = JoinedPlayers.get(i);
-    	    
-    	        int a = i % 6;
-    	        if(a == 0)
-    	        {
-    	    	    TraitorPlayers.add(playerName);
-    	    	    player.sendMessage("You are a Tritor!!");
-    	    	    player.sendMessage("Kill all the Inocent");
-    	    	    player.sendMessage("The Traitors are:");
-
-        	    	getServer().broadcastMessage("~Traitor Message~");
-    	    	    int b = 0;
-    	    	    while(b < JoinedPlayers.size() )
-    	    	    {
-    	    	    	player.sendMessage("" + JoinedPlayers.get(b));
-    	    		    b+=6;
-    	    	    }
-    	        }
-    	        else if (a == 1)
-    	        {
-    	        	DetectivePlayers.add(playerName);
-    	        	player.sendMessage("You are a Detective!!");
-    	        	player.sendMessage("Kill all the Traitors");
-        	    	getServer().broadcastMessage("Detective Message");
-    	        }
-    	        else if(a != 0 && a != 1)
-    	        {
-    	        	InnocentPlayers.add(playerName);
-    	        	player.sendMessage("You are Innocent!!");
-    	        	player.sendMessage("Kill all the Traitors");
-        	    	getServer().broadcastMessage("~Innocent Message~");
-    	        } 
-    	    }
-    	    if(TraitorPlayers.size() == 0)
-    	    {
-    		    getServer().broadcastMessage("All of the Traitors have been KILLED!!!");
-    		    getServer().broadcastMessage("The innocent WIN!!!!!");
-    		    if(getConfig().getBoolean("Server Restart") == true)
-    		    {
-    		        getServer().shutdown();
-    		    }
-    		    else if(getConfig().getBoolean("Server Restart") == false)
-    		    {
-    		        ForceStart();
-    		    }
-    	    }
-    	    if(InnocentPlayers.size() == 0)
-    	    {
-    	    	getServer().broadcastMessage("All of the Innocent have been KILLED!!!");
-    	    	getServer().broadcastMessage("The Traitors WIN!!!!!");
-    	    	if(getConfig().getBoolean("Server Restart") == true)
-    		    {
-    		        getServer().shutdown();
-    		    }
-    	    	else if(getConfig().getBoolean("Server Restart") == false)
-    		    {
-    	    		
-    		        ForceStart();
-    		    }
-    	    }
-        }
-    	else if(JoinedPlayers.size() < B)
-    	{
-    		getServer().broadcastMessage("There are not enough players online!");
-    		getServer().broadcastMessage("TMT is restarting Countdown!");
-    		
-    		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
-    			
-    			public void run()
-    			{
-    				if(A != -1)
-    				{
-    				if(A != 0)
-    				{
-    					getServer().broadcastMessage("" + A);
-    					A--;
-    				}
-    				else
-    				{
-    					ForceStart();
-    					A--;
-    				}
-    				}
-    			}
-    		},0L ,20L);
-    	}
+	public boolean getPlayers(String playerName){
+		for(Player player : onlinePlayers) {
+			String name = player.getName();
+			if(name == playerName) {
+				return true;
+			}
+		}
+		return false;
 	}
+	
 	public void Jadd(String playerName)
 	{
-			//JoinedPlayers.add(playerName);
+			JoinedPlayers.add(playerName);
 	}
 	public void Dadd(Player player)
 	{
@@ -280,7 +253,7 @@ public class TMT extends JavaPlugin
 			    else if (args[0].equalsIgnoreCase("ForceStart"))
 			    {
 			    	getServer().broadcastMessage("TMT was force started by: " + player);
-			    	ForceStart();
+			    	forceStart();
 			    }
 		}
 		return true;
