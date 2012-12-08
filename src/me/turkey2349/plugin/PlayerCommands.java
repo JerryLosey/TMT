@@ -32,10 +32,15 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				// Call a method in TMT to remove them from the ArrayList
 				player.sendMessage("You Left the Match!");
 			}
+			if (cmd.getName().equalsIgnoreCase("TMTreset")) {
+				player.sendMessage("You reset the players!");
+				plugin.clearPlayers();
+			}
 			if (cmd.getName().equalsIgnoreCase("TMTfs")) {
 				// What to do when player forces start of match.
 				// Call a method in TMT to handle matches
 				player.sendMessage("You forced the match to start!");
+				plugin.forceStart();
 			}
 			if (cmd.getName().equalsIgnoreCase("TMTcreate"))
 			{
