@@ -34,7 +34,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			}
 			if (cmd.getName().equalsIgnoreCase("TMTreset")) {
 				// Clear the players hashmap
-				// Essentially allows admin to reset the player roles
+				// Essentially allows admin to reset the player roles!
 				player.sendMessage("You reset the players!");
 				plugin.clearPlayers();
 			}
