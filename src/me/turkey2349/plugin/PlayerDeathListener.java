@@ -28,6 +28,7 @@ public class PlayerDeathListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent deathevent)
 	{
 		Player player = deathevent.getEntity();
+	//	String name = player.getDisplayName();
 		
 		Location location = deathevent.getEntity().getLocation();
 		location.getBlock().setType(Material.SIGN_POST);
@@ -37,10 +38,38 @@ public class PlayerDeathListener implements Listener {
 			plugin.getServer().broadcastMessage(""+ signBlock.getState()+"");
 			Sign sign = (Sign) signBlock.getState();
 			sign.setLine(1, ChatColor.GREEN + player.getDisplayName());
-			// Detect if traitor or innocent
 			sign.setLine(2, ChatColor.UNDERLINE + player.getDisplayName());
 			
 			sign.update(true);
+		}
+		/* if(InnocentPlayers.contains(name)
+		{
+		    InnocentPlayers.Iremove(name);
+		    Players.remove(name);
+		    DeadPlayers.Dadd(name);
+		}
+		if(triatorPlayers.contians(name))
+		{
+		    TriatorPlayers.Tremove(name);
+		    Players.remove(name);
+		    DeadPlayers.Dadd(name);
+		}
+		if(InnocentPlayers.size == 0)
+		{
+		    getServer.BroadcastMessage("The Traitors have Won!");
+		    TriatorPlayers.moveall(/*to Joined Players*//*);
+		    InnoccentPlayers.moveall(/*to Joined Players*//*);
+		    DeadPlayers.moveall(/*to Joined Players*//*);
+		    Players.clear();
+		}
+		if(TraitorPlayers.size == 0)
+		{
+		    getServer.BroadcastMessage("The Innocent have Won!");
+		    TriatorPlayers.moveall(/*to Joined Players*//*);
+		    InnoccentPlayers.moveall(/*to Joined Players*//*);
+		    DeadPlayers.moveall(/*to Joined Players*//*);
+		    Players.clear();
+		    
 		}
 	}
 }
