@@ -32,7 +32,8 @@ public class PlayerDeathListener implements Listener {
 		Location location = deathevent.getEntity().getLocation();
 		location.getBlock().setType(Material.SIGN_POST);
 		Block signBlock = location.getBlock();
-		if(signBlock.getType() == Material.SIGN_POST){
+		if(signBlock.getType() == Material.SIGN_POST)
+		{
 			plugin.getServer().broadcastMessage(""+ signBlock.getState()+"");
 			Sign sign = (Sign) signBlock.getState();
 			sign.setLine(1, ChatColor.GREEN + player.getDisplayName());
@@ -41,20 +42,5 @@ public class PlayerDeathListener implements Listener {
 			
 			sign.update(true);
 		}
-		
-		//if(InnocentPlayers.Icontains(player))
-		//{
-			TMT.setLine(1, "Innocent");
-		//}
-		//else if(TraitorPlayers.Tcontains(player))
-		//{
-		//	TMT.setLine(1, "Traitor");
-		//}
-		
-		//DeadPlayers.Dadd(player);
-		//TraitorPlayers.Tremove(player);
-		//InnocentPlayers.Iremove(player);
-
-		
 	}
 }
