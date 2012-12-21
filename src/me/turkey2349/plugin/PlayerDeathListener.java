@@ -57,14 +57,17 @@ public class PlayerDeathListener implements Listener {
 		if(InnocentPlayers.size == 0)
 		{
 		    getServer.BroadcastMessage("The Traitors have Won!");
+		    -Tp All players back to Spawn
 		    TriatorPlayers.moveall(/*to Joined Players*//*);
 		    InnoccentPlayers.moveall(/*to Joined Players*//*);
 		    DeadPlayers.moveall(/*to Joined Players*//*);
 		    Players.clear();
+		    
 		}
 		if(TraitorPlayers.size == 0)
 		{
 		    getServer.BroadcastMessage("The Innocent have Won!");
+		    -Tp All players back to Spawn
 		    TriatorPlayers.moveall(/*to Joined Players*//*);
 		    InnoccentPlayers.moveall(/*to Joined Players*//*);
 		    DeadPlayers.moveall(/*to Joined Players*//*);
