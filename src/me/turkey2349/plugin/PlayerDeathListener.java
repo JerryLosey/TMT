@@ -70,6 +70,6 @@ public class PlayerDeathListener implements Listener {
 		    DeadPlayers.moveall(/*to Joined Players*//*);
 		    Players.clear();
 		    
-		}
+		}*/
 	}
 }
