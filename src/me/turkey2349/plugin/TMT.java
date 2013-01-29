@@ -2,20 +2,18 @@ package me.turkey2349.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
+
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TMT extends JavaPlugin
@@ -28,25 +26,28 @@ public class TMT extends JavaPlugin
 	public final static ArrayList<String> DetectivePlayers = new ArrayList<String>();
 	public final static ArrayList<String> Maps = new ArrayList<String>();
 	public final static ArrayList<Integer> MapsSpawn = new ArrayList<Integer>();
-	public final Listeners Listeners = new Listeners(this);
+	public final static ArrayList<String> MapsVeto = new ArrayList<String>();
+	
 	
 	// Test
 	public static Map<String,String> players = new HashMap<String,String>();
-	public static Player[] onlinePlayers;
 	
 	// Initialize Listeners
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
+	public final PlayerListener PlayerListener = new PlayerListener(this);
 	
 	
 	public int A;
 	public int B;
+	public String Arena;
+	public Location tpCords;
+	
 	
 	static Random random = new Random();
 	Logger log = Logger.getLogger("Minecraft");
 	String LOG_PREFIX = "[TMT] ";
 	//Listeners listeners = new Listeners();
-	FileConfiguration config;
 		
 	public void onEnable()
 	{
@@ -64,7 +65,8 @@ public class TMT extends JavaPlugin
         getConfig();
         saveDefaultConfig();
         }
-		getServer().getPluginManager().registerEvents(Listeners, this);
+        
+		getServer().getPluginManager().registerEvents(PlayerListener, this);
 		getServer().getPluginManager().registerEvents(PlayerDeathListener, this);
 		getServer().getPluginManager().registerEvents(BlockBreakListener, this);
 	}
@@ -73,16 +75,11 @@ public class TMT extends JavaPlugin
 	{
 	}
 	
-	public static void setLine(int i, Player player) 
+	public void forceStart()
 	{
-	}
-	public static void setLine(int i, String string) 
-	{
-	}
-	
-	public void forceStart(){
+		//ArenaSetup();
 		A = getConfig().getInt("Wait Time(Sec)");
-		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
+		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			
 			public void run()
 			{
@@ -90,12 +87,31 @@ public class TMT extends JavaPlugin
 				{
 				if(A != 0)
 				{
+					
+					if (A == 45)
+					{
+					getServer().broadcastMessage("Next Map: " + Arena);
 					getServer().broadcastMessage("" + A);
+					}
+					if (A == 30)
+					{
+					getServer().broadcastMessage("Next Map: " + Arena);
+					getServer().broadcastMessage("" + A);
+					}
+					if (A == 15)
+					{
+					getServer().broadcastMessage("Next Map: " + Arena);
+					getServer().broadcastMessage("" + A);
+					}
+					if (A <= 10)
+					{
+					getServer().broadcastMessage("Next Map: " + Arena);
+					getServer().broadcastMessage("" + A);
+					}
 					A--;
 				}
 				else
 				{
-					//forceStart(); ?
 					A--;
 				}
 				}
@@ -105,10 +121,14 @@ public class TMT extends JavaPlugin
 		setPlayers();
 		if(players.size() >= B) {
 			getServer().broadcastMessage("Starting!");
+			
 			for (int i = 0; i < JoinedPlayers.size(); i++) {
 				String playerName = JoinedPlayers.get(i).toString();
 				Player player = Bukkit.getPlayer(playerName);
+				player.teleport(tpCords);
 				player.sendMessage("You are a: " + players.get(playerName));
+				
+				
 			}
 			
 			
@@ -120,43 +140,45 @@ public class TMT extends JavaPlugin
 	public void clearPlayers() {
 		players.clear();
 	}
-	
-	public void setPlayers() {
-		Random randomGenerator = new Random();
-		storePlayers();
+	public void setPlayers() 
+	{
 		
-		// We need to determine how many Innocent will be in the game
 		// Innocent = 75%
 		// Traitor = 25%
-		int numOfInnocent = (int) ( (players.size() + 1) * .75);
-		// Lets loop through and use the random int generator to change player statuses
-		int randomIndex = randomGenerator.nextInt(players.size());
+		int numOfInnocent = (int) (Math.round( (JoinedPlayers.size() + 1) * .75));
+		int numOfTriators = (int) (Math.round( (JoinedPlayers.size() + 1) * .25));
 		
 		int x = 0;
-		// Loop through the number of innocent players
-		// choose a random player and set them as innocent
-		// The remaining will be traitors!
-		for (x = 1; x <= numOfInnocent; x++) {
-			String playname = onlinePlayers[randomIndex].getName();
-			players.put(playname, "Innocent");
-		}
-	}
-	public void storePlayers(){
-		onlinePlayers = this.getServer().getOnlinePlayers();
-		for (Player player : onlinePlayers) {
-			String playerName = player.getName();
-			players.put("" + playerName + "", "Traitor");
-		}
-	}
-	public boolean getPlayers(String playerName){
-		for(Player player : onlinePlayers) {
-			String name = player.getName();
-			if(name == playerName) {
-				return true;
+
+		for (x = 1; x <= numOfInnocent; x++) 
+		{
+			if(x % 6 == 1)
+			{
+			    String innocent = JoinedPlayers.get(x);
+			    players.put(innocent, "Detective");
+			}
+			else if(x % 6 != 1)
+			{
+				String innocent = JoinedPlayers.get(x);
+			    players.put(innocent, "Innocent");
 			}
 		}
-		return false;
+		for (x = 1; x <= numOfTriators; x++)
+		{
+			String innocent = JoinedPlayers.get(x);
+		    players.put(innocent, "Traitor");
+		}
 	}
+	/*public void ArenaSetup()
+	{
+	MapsVeto.clear();
+	int NA = getcustomConfig().getInt("number of arenas");
+	int RA = (int) (2 + Math.random() * (NA - 2));
+    Arena = (String) getcustomConfig().get("arena" + RA);
+    tpCords = (Location) getcustomConfig().get(Arena);
+    getServer().broadcastMessage("Map Change!! New Map: " + Arena);
+	}
+	*/
 	
 	public void Jadd(String playerName)
 	{
@@ -167,30 +189,47 @@ public class TMT extends JavaPlugin
 			DeadPlayers.add(player.getDisplayName());
 
 	}
-	public void Jremove(Player player)
+	public void Jremove(String name)
 	{
-			JoinedPlayers.remove(player);
+			JoinedPlayers.remove(name);
 
 	}
-	public void Iremove(Player player)
+	public void Iremove(String name)
 	{
-			InnocentPlayers.remove(player);
+			InnocentPlayers.remove(name);
 
 	}
-	public void Tremove(Player player)
+	public void Tremove(String name)
 	{
-			TraitorPlayers.remove(player);
-
+			TraitorPlayers.remove(name);
 	}
-	public boolean Tcontains(Player player) 
+	public void MVadd(String playerListName) {
+		MapsVeto.add(playerListName);
+		
+	}
+	public boolean Jcontains(String name)
 	{
-		TMT.setLine(1, "Traitor");
+		if(JoinedPlayers.contains(name))
+		{
+		return true;
+		}
+		else if(JoinedPlayers.contains(name) == false)
+		{
 		return false;
+		}
+		return true;
 	}
-	public boolean Icontains(Player player) 
+	public boolean Tcontains(String name) 
 	{
-		TMT.setLine(1, "Innocent");
-		return false;
+		return true;
+	}
+	public boolean Icontains(String name) 
+	{
+		return true;
+	}
+	public boolean MVcontains(String name) 
+	{
+		return true;
 	}
 	public void Madd(String args)
 	{
@@ -202,59 +241,8 @@ public class TMT extends JavaPlugin
 	}
 
 	 @Override
-	    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		 Player player = (Player)sender;
-			if (cmd.getName().equalsIgnoreCase("TMT"))
-			{
-				if(args.length == 0)
-				{
-					player.sendMessage(ChatColor.RED + "/TMT ForceStart: Starts the TMT game");
-				}
-			    if (args[0].equalsIgnoreCase("Join"))
-			    {
-			    	if(getConfig().getBoolean("Force Join on Game Start") == false)
-			    	{
-				    if (player == JoinedPlayers)
-				    {
-					    player.sendMessage(ChatColor.RED + "You Are Already Playing!");
-				    }
-				    else
-				    {
-				        JoinedPlayers.add(player.getDisplayName());
-				        player.sendMessage(ChatColor.GREEN + "You Have Joined The Game!");
-				    }
-			    	}
-			    	else if(getConfig().getBoolean("Force Join on Game Start") == true)
-			    	{
-			    		player.sendMessage(ChatColor.RED + "You cannot leave or join the game!");
-			    	}
-		        }
-			    else if (args[0].equalsIgnoreCase("Leave"))
-			    {
-			    	if(getConfig().getBoolean("Force Join on Game Start") == false)
-			    	{
-				    if (player == JoinedPlayers)
-				    {
-				    	JoinedPlayers.remove(player);
-				    	 player.sendMessage(ChatColor.GREEN + "You Have Left The Games!");
-				    }
-				    else
-				    {
-				        player.sendMessage(ChatColor.RED + "You Are Not already playing");
-				    }
-			    	}
-			    	else if(getConfig().getBoolean("Force Join on Game Start") == true)
-			    	{
-			    		player.sendMessage(ChatColor.RED + "You cannot leave or join the game!");
-			    	}
-				
-			    }
-			    else if (args[0].equalsIgnoreCase("ForceStart"))
-			    {
-			    	getServer().broadcastMessage("TMT was force started by: " + player);
-			    	forceStart();
-			    }
-		}
+	    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) 
+	 {
 		return true;
 	 }
 }
