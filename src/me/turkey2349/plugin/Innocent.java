@@ -1,4 +1,4 @@
-//package me.turkey2349.plugin;
+package me.turkey2349.plugin;
 //
 //import org.bukkit.Bukkit;
 //import org.bukkit.entity.Player;
@@ -9,7 +9,7 @@
 //
 //public class Innocent extends Trait {
 //
-//	public Innocent() {
+//  public Innocent() {
 //		super("Innocent");
 //		plugin = (TMT) Bukkit.getServer().getPluginManager().getPlugin("TMT");
 //	}
