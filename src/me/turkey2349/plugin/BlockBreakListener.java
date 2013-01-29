@@ -7,11 +7,13 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 
-public class BlockBreakListener implements Listener {
+public class BlockBreakListener implements Listener 
+{
 	
 	private TMT plugin;
 
-	public BlockBreakListener(TMT plugin){
+	public BlockBreakListener(TMT plugin)
+	{
 		this.plugin = plugin;
 	}
 
