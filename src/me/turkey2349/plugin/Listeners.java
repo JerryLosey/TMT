@@ -1,6 +1,5 @@
 package me.turkey2349.plugin;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,26 +13,43 @@ public class Listeners  implements Listener
 	TMT TraitorPlayers;
 	TMT DeadPlayers;
 	
-	public Listeners(TMT p){
+	public Listeners(TMT p)
+	{
 		plugin = p;
 	}
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
-		if(plugin.getConfig().getBoolean("Force Join on Player Join") == true)
-		{
 		Player player = event.getPlayer();
 		String name = player.getName();
+		
+		if(plugin.getConfig().getBoolean("Force Join on Player Join") == true)
+		{
 		plugin.Jadd(name);
 		}
 	}
 	public void PlayerQuitEvent(org.bukkit.event.player.PlayerQuitEvent event)
 	{
 		Player player = event.getPlayer();
-		JoinedPlayers.Jremove(player);
+		String name = player.getName();
+		
+		plugin.Jremove(name);
 	}
+
+	/*public void EntityDamageByEntityEvent(EntityDamageEvent DamageEvent)
+	{
+		if(DamageEvent.getEntity() instanceof Player)
+		{
+			String Entity = DamageEvent.getEntity().toString();
+			if(JoinedPlayers.Jcontains(Entity)
+			{
+			    DamageEvent.isCancelled();
+			}
+		}
+	}*/
 	
+}
 //	@EventHandler
 //	public void PlayerDeathEvent(org.bukkit.event.entity.PlayerDeathEvent event1)
 //	{
@@ -56,4 +72,4 @@ public class Listeners  implements Listener
 //
 //		
 //	}
-}
+
