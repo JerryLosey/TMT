@@ -4,8 +4,6 @@ main: me.turkey2349.plugin.TMT
 version: 1.0.3
 author: Turkey2349
 authors: [teh_jombi]
-depend:
-  - Citizens
 commands:
    TMTjoin:
        description: Lets the player join the game
@@ -16,6 +14,10 @@ commands:
    TMTfs:
       description: Lets the player FoceStart the game
       usage: /<command>
-   TMTreset:
-      description: Lets the player reset the game and player roles
-      usage: /<command>
+   TMTcreate:
+      description: Lets the player Create an arena
+      usage: /<command> <arenaName>
+   TMTas:
+      description: Lets the player Assign the Arena spawn
+      usage: /<command> <exsistingArenaName>
+
