@@ -1,23 +1,47 @@
 name: TMT
 description: Trouble in MineTown
 main: me.turkey2349.plugin.TMT
-version: 1.0.3
-author: Turkey2349
+version: Beta V3
+author: [Turkey2349]
 authors: [teh_jombi]
 commands:
    TMTjoin:
        description: Lets the player join the game
-       usage: /<command>
+       permission: TMT.Join
+       permission-message: You don't have <permission>
    TMTleave:
       description: Lets the player leave the game
-      usage: /<command>
+      permission: TMT.Leave
+      permission-message: You don't have <permission>
+   TMTreset:
+      description: resets the game
+      permission: TMT.Reset
+      permission-message: You don't have <permission>
    TMTfs:
       description: Lets the player FoceStart the game
-      usage: /<command>
+      permission: TMT.ForceStart
+      permission-message: You don't have <permission>
    TMTcreate:
       description: Lets the player Create an arena
-      usage: /<command> <arenaName>
-   TMTas:
+      permission: TMT.Create
+      permission-message: You don't have <permission>
+   TMTArenaSpawn:
       description: Lets the player Assign the Arena spawn
-      usage: /<command> <exsistingArenaName>
-
+      permission: TMT.ArenaSpawn
+      permission-message: You don't have <permission>
+   TMTVeto:
+      description: Lets the player veto a map
+      permission: TMT.Veto
+      permission-message: You don't have <permission>
+   TMTSkip:
+      description: Lets the player Skip the Map
+      permission: TMT.Skip
+      permission-message: You don't have <permission>
+   TMTFly:
+      description: Lets the player Fly When Dead
+      permission: TMT.Fly
+      permission-message: You don't have <permission>
+   TMTArenas:
+      description: Lets the player see all created arenas
+      permission: TMT.Arenas
+      permission-message: You don't have <permission>
